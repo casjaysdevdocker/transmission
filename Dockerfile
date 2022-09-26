@@ -12,7 +12,7 @@ ENV SHELL=/bin/bash \
 
 RUN mkdir -p /bin/ /config/ /data/ && \
   rm -Rf /bin/.gitkeep /config/.gitkeep /data/.gitkeep && \
-  apk update -U --no-cache
+  apk update -U --no-cache transmission-daemon
 
 COPY ./bin/. /usr/local/bin/
 COPY ./config/. /config/
@@ -50,4 +50,3 @@ COPY --from=build /. /
 ENTRYPOINT [ "tini", "--" ]
 HEALTHCHECK CMD [ "/usr/local/bin/entrypoint-transmission.sh", "healthcheck" ]
 CMD [ "/usr/local/bin/entrypoint-transmission.sh" ]
-

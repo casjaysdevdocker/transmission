@@ -9,11 +9,11 @@
 # @@Copyright        :  Copyright: (c) 2022 Jason Hempstead, Casjays Developments
 # @@Created          :  Monday, Sep 26, 2022 13:31 EDT
 # @@File             :  entrypoint-transmission.sh
-# @@Description      :  
+# @@Description      :
 # @@Changelog        :  New script
 # @@TODO             :  Better documentation
-# @@Other            :  
-# @@Resource         :  
+# @@Other            :
+# @@Resource         :
 # @@Terminal App     :  no
 # @@sudo/root        :  no
 # @@Template         :  other/docker-entrypoint
@@ -119,7 +119,7 @@ healthcheck) # Docker healthcheck
 
 *) # Execute primary command
   if [ $# -eq 0 ]; then
-    __exec_bash "/bin/bash"
+    transmission-daemon
   else
     __exec_bash "/bin/bash"
   fi
