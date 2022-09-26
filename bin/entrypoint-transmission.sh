@@ -106,8 +106,7 @@ case "$1" in
   ;;
 
 healthcheck) # Docker healthcheck
-  echo "$(uname -s) $(uname -m) is running"
-  echo _other_commands here
+  [ -f "/tmp/transmission-daemon.pid" ]
   exitCode=$?
   ;;
 
@@ -119,7 +118,7 @@ healthcheck) # Docker healthcheck
 
 *) # Execute primary command
   if [ $# -eq 0 ]; then
-    transmission-daemon
+    transmission-daemon --config-dir /config/transmission -f
   else
     __exec_bash "/bin/bash"
   fi
