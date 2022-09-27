@@ -94,6 +94,10 @@ fi
 [ -f "/etc/.env.sh" ] && rm -Rf "/etc/.env.sh"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Additional commands
+[ -d "/data/Torrents/torrents" ] || mkdir -p "/data/Torrents/torrents"
+[ -d "/data/Torrents/Complete" ] || mkdir -p "/data/Torrents/Complete"
+[ -d "/data/Torrents/InComplete" ] || mkdir -p "/data/Torrents/InComplete"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -f "/config/transmission/settings.json" ]; then
   cp -Rf "/config/transmission/settings.json" "/etc/transmission/settings.json"
 else
