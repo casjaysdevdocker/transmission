@@ -101,6 +101,7 @@ fi
 if [ -f "/config/transmission/settings.json" ]; then
   cp -Rf "/config/transmission/settings.json" "/etc/transmission/settings.json"
 else
+  [ -d "/config/transmission" ] || mkdir -p "/config/transmission"
   cp -Rf "/etc/transmission/settings.json" "/config/transmission/settings.json"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
