@@ -15,7 +15,7 @@ RUN mkdir -p /bin/ /config/ /data/ && \
   apk update -U --no-cache transmission-daemon
 
 COPY ./bin/. /usr/local/bin/
-COPY ./config/. /config/
+COPY ./config/. /etc/
 COPY ./data/. /data/
 
 FROM scratch

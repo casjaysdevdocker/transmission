@@ -94,7 +94,11 @@ fi
 [ -f "/etc/.env.sh" ] && rm -Rf "/etc/.env.sh"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Additional commands
-
+if [ -f "/config/transmission/settings.json" ]; then
+  cp -Rf "/config/transmission/settings.json" "/etc/transmission/settings.json"
+else
+  cp -Rf "/etc/transmission/settings.json" "/config/transmission/settings.json"
+fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 case "$1" in
 --help) # Help message
@@ -118,7 +122,7 @@ healthcheck) # Docker healthcheck
 
 *) # Execute primary command
   if [ $# -eq 0 ]; then
-    transmission-daemon --config-dir /config/transmission -f
+    transmission-daemon --config-dir /etc/transmission -f
   else
     __exec_bash "/bin/bash"
   fi
