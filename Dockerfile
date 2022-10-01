@@ -12,7 +12,7 @@ ENV SHELL=/bin/bash \
 
 RUN mkdir -p /bin/ /config/ /data/ && \
   rm -Rf /bin/.gitkeep /config/.gitkeep /data/.gitkeep && \
-  apk add -U --no-cache transmission-daemon
+  apk add -U --no-cache transmission-daemon transmission-cli
 
 COPY ./bin/. /usr/local/bin/
 COPY ./config/. /etc/
