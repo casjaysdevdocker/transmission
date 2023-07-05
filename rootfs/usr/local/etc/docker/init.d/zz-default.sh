@@ -78,11 +78,11 @@ DATABASE_DIR="${DATABASE_DIR_TRANSMISSION:-/data/db/transmission}"
 SERVICE_PORT=""
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # execute command variables
-SERVICE_UID="0"                                      # set the user id
-SERVICE_USER="root"                                  # execute command as another user
-EXEC_CMD_BIN="transmission-daemon"                   # command to execute
-EXEC_CMD_ARGS="--config-dir /config/transmission -f" # command arguments
-EXEC_PRE_SCRIPT=""                                   # execute script before
+SERVICE_UID="0"                           # set the user id
+SERVICE_USER="root"                       # execute command as another user
+EXEC_CMD_BIN="transmission-daemon"        # command to execute
+EXEC_CMD_ARGS="-f --config-dir $CONF_DIR" # command arguments
+EXEC_PRE_SCRIPT=""                        # execute script before
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Is this service a web server
 IS_WEB_SERVER="no"
@@ -195,7 +195,8 @@ __post_execute() {
   sleep 60                           # how long to wait before executing
   echo "Running post commands"       # message
   # execute commands
-
+  mkdir -p "$PWD/.config"
+  ln -sf "$CONF_DIR" "$PWD/.config/transmission-daemon"
   return $exitCode
 }
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
