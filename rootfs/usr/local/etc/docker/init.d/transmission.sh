@@ -82,7 +82,7 @@ SERVICE_UID="0"                            # set the user id
 SERVICE_USER="root"                        # execute command as another user
 EXEC_CMD_BIN="transmission-daemon"         # command to execute
 EXEC_CMD_ARGS="-f --config-dir $CONF_DIR/" # command arguments
-EXEC_PRE_SCRIPT="sleep 20 &&"              # execute script before
+EXEC_PRE_SCRIPT=""                         # execute script before
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Is this service a web server
 IS_WEB_SERVER="no"
@@ -121,6 +121,7 @@ __update_conf_files() {
   local local_trans_conf_dir="${WORKDIR:-$PWD}/.config/transmission-daemon"
 
   # define actions
+  mkdir -p "$local_trans_conf_dir" "/tmp/docker/.config"
 
   # create default directories
   for filedirs in $ADD_APPLICATION_DIRS $APPLICATION_DIRS; do
@@ -150,8 +151,8 @@ __update_conf_files() {
   # replace variables recursively
   # __find_replace "" "" "$CONF_DIR/"
   # custom commands
-  mkdir -p "$local_trans_conf_dir"
   ln -sf "$CONF_DIR" "$local_trans_conf_dir"
+  ln -sf "$CONF_DIR" "/tmp/docker/.config/transmission-daemon"
 
   # other
 
