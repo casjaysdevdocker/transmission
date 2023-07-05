@@ -5,10 +5,10 @@
 # @@Author           :  Jason Hempstead
 # @@Contact          :  jason@casjaysdev.com
 # @@License          :  WTFPL
-# @@ReadME           :  zz-default.sh --help
+# @@ReadME           :  transmission.sh --help
 # @@Copyright        :  Copyright: (c) 2023 Jason Hempstead, Casjays Developments
 # @@Created          :  Tuesday, Jul 04, 2023 22:26 EDT
-# @@File             :  zz-default.sh
+# @@File             :  transmission.sh
 # @@Description      :
 # @@Changelog        :  New script
 # @@TODO             :  Better documentation
@@ -166,9 +166,8 @@ __pre_execute() {
   local exitCode=0                   # default exit code
   local user="${SERVICE_USER:-root}" # specifiy different user
   # define commands
-
-  # execute if directories is empty
-  #__is_dir_empty "" &&
+  mkdir -p "$PWD/.config"
+  ln -sf "$CONF_DIR" "$PWD/.config/transmission-daemon"
 
   # create user if needed
   # __create_service_user "$user" "/home/$user" "${USER_GID:-${USER_UID:-1000}"
@@ -195,8 +194,7 @@ __post_execute() {
   sleep 60                           # how long to wait before executing
   echo "Running post commands"       # message
   # execute commands
-  mkdir -p "$PWD/.config"
-  ln -sf "$CONF_DIR" "$PWD/.config/transmission-daemon"
+
   return $exitCode
 }
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
