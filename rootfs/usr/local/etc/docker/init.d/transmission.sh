@@ -82,7 +82,7 @@ SERVICE_UID="0"                            # set the user id
 SERVICE_USER="root"                        # execute command as another user
 EXEC_CMD_BIN="transmission-daemon"         # command to execute
 EXEC_CMD_ARGS="-f --config-dir $CONF_DIR/" # command arguments
-EXEC_PRE_SCRIPT=""                         # execute script before
+EXEC_PRE_SCRIPT="sleep 20 &&"              # execute script before
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Is this service a web server
 IS_WEB_SERVER="no"
