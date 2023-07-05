@@ -78,11 +78,11 @@ DATABASE_DIR="${DATABASE_DIR_TRANSMISSION:-/data/db/transmission}"
 SERVICE_PORT=""
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # execute command variables
-SERVICE_UID="0"                                   # set the user id
-SERVICE_USER="root"                               # execute command as another user
-EXEC_CMD_BIN="transmission-daemon"                # command to execute
-EXEC_CMD_ARGS="--config-dir /config/transmission" # command arguments
-EXEC_PRE_SCRIPT=""                                # execute script before
+SERVICE_UID="0"                                      # set the user id
+SERVICE_USER="root"                                  # execute command as another user
+EXEC_CMD_BIN="transmission-daemon"                   # command to execute
+EXEC_CMD_ARGS="--config-dir /config/transmission -f" # command arguments
+EXEC_PRE_SCRIPT=""                                   # execute script before
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Is this service a web server
 IS_WEB_SERVER="no"
