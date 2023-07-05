@@ -16,7 +16,7 @@
 # @@Resource         :
 # @@Terminal App     :  no
 # @@sudo/root        :  no
-# @@Template         :  shell/zsh
+# @@Template         :  shell/bash
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # shellcheck disable=SC2016
 # shellcheck disable=SC2031
@@ -75,7 +75,7 @@ DATABASE_DIR="${DATABASE_DIR_TRANSMISSION:-/data/db/transmission}"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # port which service is listening on
-SERVICE_PORT=""
+SERVICE_PORT="9091"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # execute command variables
 SERVICE_UID="0"                            # set the user id
@@ -119,9 +119,6 @@ __update_conf_files() {
   local exitCode=0                   # default exit code
   local user="${SERVICE_USER:-root}" # specifiy different user
 
-  # delete files
-  #__rm ""
-
   # define actions
 
   # create default directories
@@ -152,6 +149,8 @@ __update_conf_files() {
   # replace variables recursively
   # __find_replace "" "" "$CONF_DIR/"
   # custom commands
+  mkdir -p "$PWD/.config"
+  ln -sf "$CONF_DIR" "$PWD/.config/transmission-daemon"
 
   # other
 
@@ -166,8 +165,6 @@ __pre_execute() {
   local exitCode=0                   # default exit code
   local user="${SERVICE_USER:-root}" # specifiy different user
   # define commands
-  mkdir -p "$PWD/.config"
-  ln -sf "$CONF_DIR" "$PWD/.config/transmission-daemon"
 
   # create user if needed
   # __create_service_user "$user" "/home/$user" "${USER_GID:-${USER_UID:-1000}"
