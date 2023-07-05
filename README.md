@@ -1,6 +1,8 @@
 ## 👋 Welcome to transmission 🚀  
 
-transmission README  
+Transmission is designed for easy, powerful use. Transmission has the features you want from a BitTorrent client:  
+encryption, a web interface, peer exchange, magnet links, DHT, µTP, UPnP and NAT-PMP port forwarding, webseed support,  
+watch directories, tracker editing, global and per-torrent speed limits, and more.  
   
   
 ## Install my system scripts  
@@ -28,9 +30,12 @@ docker run -d \
 --name casjaysdevdocker-transmission \
 --hostname transmission \
 -e TZ=${TIMEZONE:-America/New_York} \
+-v /mnt/downloads:/data/downloads:z \
 -v $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/rootfs/data:/data:z \
 -v $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/rootfs/config:/config:z \
--p 80:80 \
+-p 0.0.0.0:9091:9091 \
+-p 0.0.0.0:51413:51413 \
+-p 0.0.0.0:51413:51413/udp \
 casjaysdevdocker/transmission:latest
 ```
   
@@ -46,10 +51,13 @@ services:
       - TZ=America/New_York
       - HOSTNAME=transmission
     volumes:
+      - /mnt/downloads:/data/downloads:z
       - $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/rootfs/data:/data:z
       - $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/rootfs/config:/config:z
     ports:
-      - 80:80
+      - 0.0.0.0:9091:9091
+      - 0.0.0.0:51413:51413
+      - 0.0.0.0:51413:51413/udp
     restart: always
 ```
   
