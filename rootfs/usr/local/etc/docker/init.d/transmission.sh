@@ -55,7 +55,7 @@ done
 PRE_EXEC_MESSAGE=""
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Default predefined variables
-WORKDIR=""                 # set working directory
+WORKDIR="/root"            # set working directory
 DATA_DIR="/data"           # set data directory
 WWW_DIR="/data/htdocs/www" # set the web root
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -118,6 +118,7 @@ APPLICATION_DIRS="$RUN_DIR $ETC_DIR $CONF_DIR $LOG_DIR"
 __update_conf_files() {
   local exitCode=0                   # default exit code
   local user="${SERVICE_USER:-root}" # specifiy different user
+  local local_trans_conf_dir="${WORKDIR:-$PWD}/.config/transmission-daemon"
 
   # define actions
 
@@ -149,8 +150,8 @@ __update_conf_files() {
   # replace variables recursively
   # __find_replace "" "" "$CONF_DIR/"
   # custom commands
-  mkdir -p "$PWD/.config"
-  ln -sf "$CONF_DIR" "$PWD/.config/transmission-daemon"
+  mkdir -p "$local_trans_conf_dir"
+  ln -sf "$CONF_DIR" "$local_trans_conf_dir"
 
   # other
 
