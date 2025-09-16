@@ -1,4 +1,4 @@
-# gitignore created on 07/04/23 at 22:26
+# gitignore created on 09/16/25 at 11:51
 # Disable reminder in prompt
 ignoredirmessage
 
@@ -80,8 +80,9 @@ $RECYCLE.BIN/
 # ignore commit message
 **/.gitcommit
 
-#ignore .failed
-**/.build_failed
+# ignore .build_failed files
+**/.build_failed*
+
 
 # ignore .bak files
 **/*.bak
@@ -94,4 +95,9 @@ $RECYCLE.BIN/
 
 # ignore .installed files
 **/.installed
+
+# ignore work in progress files
+**/*.rewrite.sh
+**/*.refactor.sh
+
 
