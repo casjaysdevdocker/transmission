@@ -21,9 +21,9 @@ dockermgr update transmission
 ## Install and run container
   
 ```shell
-mkdir -p "$HOME/.local/share/srv/docker/transmission/rootfs"
+mkdir -p "$HOME/.local/share/srv/docker/transmission/volumes"
 git clone "https://github.com/dockermgr/transmission" "$HOME/.local/share/CasjaysDev/dockermgr/transmission"
-cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/transmission/rootfs/." "$HOME/.local/share/srv/docker/transmission/rootfs/"
+cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/transmission/rootfs/." "$HOME/.local/share/srv/docker/transmission/volumes/"
 docker run -d \
 --restart always \
 --privileged \
@@ -31,8 +31,8 @@ docker run -d \
 --hostname transmission \
 -e TZ=${TIMEZONE:-America/New_York} \
 -v /mnt/downloads:/data/downloads:z \
--v $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/rootfs/data:/data:z \
--v $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/rootfs/config:/config:z \
+-v $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/volumes/data:/data:z \
+-v $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/volumes/config:/config:z \
 -p 0.0.0.0:9091:9091 \
 -p 0.0.0.0:51413:51413 \
 -p 0.0.0.0:51413:51413/udp \
@@ -52,8 +52,8 @@ services:
       - HOSTNAME=transmission
     volumes:
       - /mnt/downloads:/data/downloads:z
-      - $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/rootfs/data:/data:z
-      - $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/rootfs/config:/config:z
+      - $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/volumes/data:/data:z
+      - $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/volumes/config:/config:z
     ports:
       - 0.0.0.0:9091:9091
       - 0.0.0.0:51413:51413
