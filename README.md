@@ -1,8 +1,6 @@
 ## 👋 Welcome to transmission 🚀  
 
-Transmission is designed for easy, powerful use. Transmission has the features you want from a BitTorrent client:  
-encryption, a web interface, peer exchange, magnet links, DHT, µTP, UPnP and NAT-PMP port forwarding, webseed support,  
-watch directories, tracker editing, global and per-torrent speed limits, and more.  
+transmission README  
   
   
 ## Install my system scripts  
@@ -21,21 +19,19 @@ dockermgr update transmission
 ## Install and run container
   
 ```shell
-mkdir -p "$HOME/.local/share/srv/docker/transmission/volumes"
+dockerHome="/var/lib/srv/$USER/docker/casjaysdevdocker/transmission/transmission/latest/rootfs"
+mkdir -p "/var/lib/srv/$USER/docker/transmission/rootfs"
 git clone "https://github.com/dockermgr/transmission" "$HOME/.local/share/CasjaysDev/dockermgr/transmission"
-cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/transmission/rootfs/." "$HOME/.local/share/srv/docker/transmission/volumes/"
+cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/transmission/rootfs/." "$dockerHome/"
 docker run -d \
 --restart always \
 --privileged \
---name casjaysdevdocker-transmission \
+--name casjaysdevdocker-transmission-latest \
 --hostname transmission \
 -e TZ=${TIMEZONE:-America/New_York} \
--v /mnt/downloads:/data/downloads:z \
--v $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/volumes/data:/data:z \
--v $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/volumes/config:/config:z \
--p 0.0.0.0:9091:9091 \
--p 0.0.0.0:51413:51413 \
--p 0.0.0.0:51413:51413/udp \
+-v "$dockerHome/data:/data:z" \
+-v "$dockerHome/config:/config:z" \
+-p 80:80 \
 casjaysdevdocker/transmission:latest
 ```
   
@@ -51,13 +47,10 @@ services:
       - TZ=America/New_York
       - HOSTNAME=transmission
     volumes:
-      - /mnt/downloads:/data/downloads:z
-      - $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/volumes/data:/data:z
-      - $HOME/.local/share/srv/docker/casjaysdevdocker-transmission/volumes/config:/config:z
+      - "/var/lib/srv/$USER/docker/casjaysdevdocker/transmission/transmission/latest/rootfs/data:/data:z"
+      - "/var/lib/srv/$USER/docker/casjaysdevdocker/transmission/transmission/latest/rootfs/config:/config:z"
     ports:
-      - 0.0.0.0:9091:9091
-      - 0.0.0.0:51413:51413
-      - 0.0.0.0:51413:51413/udp
+      - 80:80
     restart: always
 ```
   
